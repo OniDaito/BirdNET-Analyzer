@@ -1,5 +1,12 @@
 """ A reworking of the BirdNet server, but using flask
 as the basic webserver instead.
+
+This server processes a wav file sent to it, returning
+the confidence values for each species. To run the
+server, execute the following:
+
+flask --app server run
+
 """
 from flask import Flask
 from flask import request
