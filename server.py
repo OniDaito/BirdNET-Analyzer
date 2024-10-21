@@ -21,8 +21,6 @@ import utils
 
 app = Flask(__name__)
 
-
-
 def resultPooling(lines: list[str], num_results=5, pmode="avg"):
     """Parses the results into list of (species, score).
 
@@ -36,16 +34,16 @@ def resultPooling(lines: list[str], num_results=5, pmode="avg"):
     Returns:
         A List of (species, score).
     """
-    # Parse results
+    # Parse results. Results are dependent on the cfg.RESULT_TYPES = ["audacity"] annoyingly
     results = {}
     assert(len(lines) > 1)
 
-    # Ignore the first line as that's the table header
-    for line in lines[1:]:
+
+    for line in lines:
         # Hardcoded positions here! Tsk
         d = line.split("\t")
-        species = d[7].replace(", ", "_")
-        score = float(d[9])
+        species = d[2].replace(", ", "_")
+        score = float(d[3])
 
         if species not in results:
             results[species] = []
@@ -70,7 +68,7 @@ def analysis():
     cfg.CODES = analyze.loadCodes()
     cfg.LABELS = utils.readLines(cfg.LABELS_FILE)
     cfg.TRANSLATED_LABELS = cfg.LABELS
-
+    cfg.RESULT_TYPES = ["audacity"]
 
     # Start by creating a temporary working directory
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -111,7 +109,7 @@ def analysis():
             # Parse results
             if success:   
                 # Results file - matches the wav file name in the first part
-                results_file = tmpdirname + "/audio.BirdNET.selection.table.txt"
+                results_file = tmpdirname + "/audio.BirdNET.results.txt"
 
                 # Print all the files we have
                 #for root, dirs, files in os.walk(tmpdirname):
