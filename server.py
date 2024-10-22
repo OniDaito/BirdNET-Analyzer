@@ -70,6 +70,11 @@ def analysis():
     cfg.TRANSLATED_LABELS = cfg.LABELS
     cfg.RESULT_TYPES = ["audacity"]
 
+    cfg.WEEK = -1
+    cfg.SIG_OVERLAP = 2.0
+    cfg.SIGMOID_SENSITIVITY = 1.5
+    cfg.LOCATION_FILTER_THRESHOLD = 0.03
+
     # Start by creating a temporary working directory
     with tempfile.TemporaryDirectory() as tmpdirname:
         f = request.files['audio']
