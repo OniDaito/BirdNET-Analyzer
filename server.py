@@ -91,12 +91,12 @@ def analysis():
             cfg.FILE_STORAGE_PATH = tmpdirname
             cfg.MIN_CONFIDENCE = 0.0
 
-            #if "lat" in meta and "lon" in meta:
-            #    cfg.LATITUDE = float(meta["lat"])
-            #    cfg.LONGITUDE = float(meta["lon"])
-            #else:
-            cfg.LATITUDE = -1
-            cfg.LONGITUDE = -1
+            if "lat" in meta and "lon" in meta:
+                cfg.LATITUDE = float(meta["lat"])
+                cfg.LONGITUDE = float(meta["lon"])
+            else:
+                cfg.LATITUDE = -1
+                cfg.LONGITUDE = -1
 
             cfg.WEEK = int(meta.get("week", -1))
             cfg.SIG_OVERLAP = max(0.0, min(2.9, float(meta.get("overlap", 0.0))))
