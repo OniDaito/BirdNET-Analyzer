@@ -95,13 +95,13 @@ def analysis():
                 cfg.LATITUDE = float(meta["lat"])
                 cfg.LONGITUDE = float(meta["lon"])
             else:
-                cfg.LATITUDE = -1
-                cfg.LONGITUDE = -1
+                cfg.LATITUDE = 56.3126
+                cfg.LONGITUDE = -2.9429
 
             cfg.WEEK = int(meta.get("week", -1))
             cfg.SIG_OVERLAP = max(0.0, min(2.9, float(meta.get("overlap", 0.0))))
             cfg.SIGMOID_SENSITIVITY = max(0.5, min(1.0 - (float(meta.get("sensitivity", 1.0)) - 1.0), 1.5))
-            cfg.LOCATION_FILTER_THRESHOLD = max(0.01, min(0.99, float(meta.get("sf_thresh", 0.03))))
+            cfg.LOCATION_FILTER_THRESHOLD = 0.03 # max(0.01, min(0.99, float(meta.get("sf_thresh", 0.03))))
 
 
             # Set species list
